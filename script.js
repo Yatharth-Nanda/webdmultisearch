@@ -8,11 +8,12 @@ var content = "";
 function search(event) {
   if (event.key == "Enter") {
     content = content.trim();
+
     arr = content.split(" ");
     search_target = arr.splice(0, 1).toString();
 
     search_target = search_target.toLowerCase();
-    query = arr.join(" ").replace("Backspace", "");
+    query = arr.join(" ");
 
     switch (search_target) {
       case "google":
@@ -22,20 +23,20 @@ function search(event) {
         window.location.href = `https://docs.google.com/document/?q=${query}`;
         break;
       case "youtube":
-        window.location = `https://www.youtube.com/results?search_query=${query}`;
+        window.location.href = `https://www.youtube.com/results?search_query=${query}`;
         break;
 
       case "slides":
-        window.location = `https://docs.google.com/presentation/?q=${query}`;
+        window.location.href = `https://docs.google.com/presentation/?q=${query}`;
         break;
       case "drive":
-        window.location = `https://drive.google.com/drive/search?q=${query}`;
+        window.location.href = `https://drive.google.com/drive/search?q=${query}`;
         break;
       case "sheets":
-        window.location = `https://docs.google.com/spreadsheets/?q=${query}`;
+        window.location.href = `https://docs.google.com/spreadsheets/?q=${query}`;
         break;
       default:
-        window.location = `https://www.google.co.in/search?q=${search_target}$%20{query}`;
+        window.location.href = `https://www.google.co.in/search?q=${search_target}%20${query}`;
     }
 
     gs = document.querySelector("input");
@@ -44,5 +45,7 @@ function search(event) {
 
   console.log(event.key);
   content += event.key;
+  content = content.replace("Backspace", "");
+  content = content.replace("delete", "");
   console.log(content);
 }
